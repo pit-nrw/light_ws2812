@@ -121,14 +121,14 @@ void WS2812::sync() {
 		}
 	#else
 
-		void WS2812W::setColorOrderRGBW() {
+		void WS2812::setColorOrderRGBW() {
 			offsetBlue = 0;
 			offsetRed = 1;
 			offsetGreen = 2;
 			offsetWhite = 3;
 		}
 
-		void WS2812W::setColorOrderGRBW() {
+		void WS2812::setColorOrderGRBW() {
 			offsetGreen = 0;
 			offsetRed = 1;
 			offsetBlue = 2;
