@@ -37,6 +37,10 @@
 #endif
 #endif
 
+// comment if using RGB leds, uncomment if using RGBW leds
+#define USE_RGBW
+
+
 //Easier to change cRGB into any other rgb struct
 #include "cRGB.h"
 
@@ -47,11 +51,17 @@
 	#define OFFSET_R(r) r+offsetRed
 	#define OFFSET_G(g) g+offsetGreen
 	#define OFFSET_B(b) b+offsetBlue
+	#ifdef USE_RGBW
+		#define OFFSET_W(w) w+offsetWhite
+	#endif
 #else
 // CHANGE YOUR STATIC RGB ORDER HERE
 	#define OFFSET_R(r) r+1
 	#define OFFSET_G(g) g	
 	#define OFFSET_B(b) b+2	
+	#ifdef USE_RGBW
+		#define OFFSET_W(w) w+3
+	#endif
 #endif
 
 class WS2812 {
@@ -71,10 +81,15 @@ public:
 
 	void sync();
 	
-#ifdef RGB_ORDER_ON_RUNTIME	
-	void setColorOrderRGB();
-	void setColorOrderGRB();
-	void setColorOrderBRG();
+#ifdef RGB_ORDER_ON_RUNTIME
+	#ifndef USE_RGBW
+		void setColorOrderRGB();
+		void setColorOrderGRB();
+		void setColorOrderBRG();
+	#else
+		void setColorOrderGRBW();
+		void setColorOrderRGBW();
+	#endif
 #endif
 
 private:
@@ -85,6 +100,9 @@ private:
 	uint8_t offsetRed;
 	uint8_t offsetGreen;
 	uint8_t offsetBlue;
+	#ifdef USE_RGBW
+		uint8_t offsetWhite;
+	#endif
 #endif	
 
 	void ws2812_sendarray_mask(uint8_t *array,uint16_t length, uint8_t pinmask,uint8_t *port, uint8_t *portreg);

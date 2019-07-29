@@ -49,7 +49,10 @@ struct cRGB {
 	uint8_t g; 
 	uint8_t r; 
 	uint8_t b;
-
+#ifdef USE_RGBW
+	uint8_t w;
+#endif
+	
 #ifdef USE_HSV
 	void SetHSV(int hue, byte sat, byte val) {
 		/* convert hue, saturation and brightness ( HSB/HSV ) to RGB
@@ -66,6 +69,9 @@ struct cRGB {
 			r = val;
 			g = val;
 			b = val;
+			#ifdef USE_RGBW
+				w = val;
+			#endif
 		}
 		else  {
 			base = ((255 - sat) * val) >> 8;
@@ -75,36 +81,54 @@ struct cRGB {
 				r = val;
 				g = (((val - base)*hue) / 60) + base;
 				b = base;
+				#ifdef USE_RGBW
+				w = base;
+				#endif
 				break;
 
 			case 1:
 				r = (((val - base)*(60 - (hue % 60))) / 60) + base;
 				g = val;
 				b = base;
+				#ifdef USE_RGBW
+				w = base;
+				#endif
 				break;
 
 			case 2:
 				r = base;
 				g = val;
 				b = (((val - base)*(hue % 60)) / 60) + base;
+				#ifdef USE_RGBW
+				w = base;
+				#endif
 				break;
 
 			case 3:
 				r = base;
 				g = (((val - base)*(60 - (hue % 60))) / 60) + base;
 				b = val;
+				#ifdef USE_RGBW
+				w = base;
+				#endif
 				break;
 
 			case 4:
 				r = (((val - base)*(hue % 60)) / 60) + base;
 				g = base;
 				b = val;
+				#ifdef USE_RGBW
+				w = base;
+				#endif
 				break;
 
 			case 5:
 				r = val;
 				g = base;
 				b = (((val - base)*(60 - (hue % 60))) / 60) + base;
+				#ifdef USE_RGBW
+				w = base;
+				#endif
 				break;
 			}			
 		}
