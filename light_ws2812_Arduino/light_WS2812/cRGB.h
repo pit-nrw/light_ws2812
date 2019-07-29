@@ -49,7 +49,7 @@ struct cRGB {
 	uint8_t g; 
 	uint8_t r; 
 	uint8_t b;
-#ifdef RGBW
+#ifdef USE_RGBW
 	uint8_t w;
 #endif
 	
@@ -69,7 +69,7 @@ struct cRGB {
 			r = val;
 			g = val;
 			b = val;
-			#ifdef RGBW
+			#ifdef USE_RGBW
 				w = val;
 			#endif
 		}
@@ -81,7 +81,7 @@ struct cRGB {
 				r = val;
 				g = (((val - base)*hue) / 60) + base;
 				b = base;
-				#ifdef RGBW
+				#ifdef USE_RGBW
 				w = base;
 				#endif
 				break;
@@ -90,7 +90,7 @@ struct cRGB {
 				r = (((val - base)*(60 - (hue % 60))) / 60) + base;
 				g = val;
 				b = base;
-				#ifdef RGBW
+				#ifdef USE_RGBW
 				w = base;
 				#endif
 				break;
@@ -99,7 +99,7 @@ struct cRGB {
 				r = base;
 				g = val;
 				b = (((val - base)*(hue % 60)) / 60) + base;
-				#ifdef RGBW
+				#ifdef USE_RGBW
 				w = base;
 				#endif
 				break;
@@ -108,7 +108,7 @@ struct cRGB {
 				r = base;
 				g = (((val - base)*(60 - (hue % 60))) / 60) + base;
 				b = val;
-				#ifdef RGBW
+				#ifdef USE_RGBW
 				w = base;
 				#endif
 				break;
@@ -117,7 +117,7 @@ struct cRGB {
 				r = (((val - base)*(hue % 60)) / 60) + base;
 				g = base;
 				b = val;
-				#ifdef RGBW
+				#ifdef USE_RGBW
 				w = base;
 				#endif
 				break;
@@ -126,7 +126,7 @@ struct cRGB {
 				r = val;
 				g = base;
 				b = (((val - base)*(60 - (hue % 60))) / 60) + base;
-				#ifdef RGBW
+				#ifdef USE_RGBW
 				w = base;
 				#endif
 				break;
