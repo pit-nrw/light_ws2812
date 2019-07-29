@@ -37,6 +37,10 @@
 #endif
 #endif
 
+// comment if using RGB leds, uncomment if using RGBW leds
+#define USE_RGBW
+
+
 //Easier to change cRGB into any other rgb struct
 #include "cRGB.h"
 
