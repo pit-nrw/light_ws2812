@@ -17,8 +17,11 @@
 
 WS2812::WS2812(uint16_t num_leds) {
 	count_led = num_leds;
-	
-	pixels = (uint8_t*)malloc(count_led*3);
+	#ifdef USE_RGBW
+		pixels = (uint8_t*)malloc(count_led*4);
+	#else
+		pixels = (uint8_t*)malloc(count_led*3);
+	#endif
 	#ifdef RGB_ORDER_ON_RUNTIME	
 		offsetGreen = 0;
 		offsetRed = 1;
